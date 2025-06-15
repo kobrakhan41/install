@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Moneton Ads</title>
+
+  <!-- Monetag Script (Main Ad) -->
+  <script src='//libtl.com/sdk.js' data-zone='9423518' data-sdk='show_9423518'></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #ffd700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+    .user-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+      padding: 15px;
+      background: linear-gradient(135deg, #2c2c2c, #1f1f1f);
+      border: 2px solid #ffd700;
+      border-radius: 15px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #ffd700;
+      margin-right: 15px;
+      object-fit: cover;
+      background-color: #333;
+    }
+    .user-details h2 {
+      font-size: 18px;
+      margin: 0;
+      color: #ffd700;
+      font-weight: 600;
+    }
+    .user-details p {
+      margin: 5px 0 0 0;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .balance-info {
+      text-align: right;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .balance-info p {
+      margin: 0;
+    }
+    .ad-container {
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(135deg, #2c2c2c, #1f1f1f);
+      border: 2px solid #ffd700;
+      border-radius: 15px;
+      padding: 25px 20px;
+      margin-top: 30px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .ad-container h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #ffd700;
+    }
+    .reward-button {
+      padding: 14px 30px;
+      font-size: 18px;
+      background: linear-gradient(to right, #ffd700, #ffaa00);
+      color: #1a1a1a;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+      transition: all 0.3s ease;
+      width: 80%;
+      max-width: 250px;
+    }
+    .reward-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+    .reward-button:active {
+      transform: translateY(1px);
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 600px;
+      background: #2c2c2c;
+      padding: 15px 0;
+      display: flex;
+      justify-content: space-around;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+      border-top: 1px solid #444;
+      z-index: 100;
+    }
+    .bottom-nav a {
+      color: #ffd700;
+      text-align: center;
+      text-decoration: none;
+      flex: 1;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .bottom-nav a:hover {
+      color: #fff;
+    }
+    .bottom-nav i {
+      font-size: 1.4rem;
+      margin-bottom: 5px;
+    }
+    .points-display {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 5px 0;
+      color: #ffd700;
+    }
+    .ad-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      width: 100%;
+      max-width: 400px;
+      margin-top: 20px;
+    }
+    .ad-item {
+      background: linear-gradient(135deg, #2c2c2c, #1f1f1f);
+      border: 1px solid #444;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .ad-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+    }
+    .ad-item i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #ffd700;
+    }
+    .payment-section {
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(135deg, #2c2c2c, #1f1f1f);
+      border: 2px solid #ffd700;
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 30px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .payment-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #ffd700;
+    }
+    .payment-button {
+      padding: 12px 25px;
+      font-size: 16px;
+      background: linear-gradient(to right, #4CAF50, #2E7D32);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 250px;
+      margin-top: 10px;
+    }
+    .payment-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    }
+    .payment-button:disabled {
+      background: linear-gradient(to right, #616161, #424242);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .transaction-details {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #1f1f1f;
+      border-radius: 10px;
+      border: 1px solid #444;
+      display: none;
+    }
+    .transaction-details p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .transaction-code {
+      font-weight: bold;
+      color: #ffd700;
+      font-size: 16px;
+    }
+    .usdt-input {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 8px;
+      border: 1px solid #ffd700;
+      background: #1f1f1f;
+      color: white;
+      font-size: 14px;
+    }
+
+    @media (max-width: 400px) {
+      .user-card {
+        padding: 12px;
+      }
+      .user-avatar {
+        width: 50px;
+        height: 50px;
+      }
+      .user-details h2 {
+        font-size: 16px;
+      }
+      .reward-button {
+        padding: 12px 25px;
+        font-size: 16px;
+      }
+      .ad-container h1 {
+        font-size: 1.3rem;
+      }
+      .ad-grid {
+        grid-template-columns: 1fr;
+      }
+      .payment-section h2 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="user-card">
+    <div class="user-info">
+      <img id="userAvatar" src="" class="user-avatar" />
+      <div class="user-details">
+        <h2 id="userName">Loading...</h2>
+        <p>💼<span id="userNumber">MoneTon Ads</span></p>
+      </div>
+    </div>
+    <div class="balance-info">
+      <p>DOGS: <span class="DOGS-display" id="userPoints">0</span></p>
+    </div>
+  </div>
+
+  <div class="ad-container">
+    <h1>Complete Reward Ads</h1>
+    <button class="reward-button" onclick="showRewardedAd('main')">
+      <i class="fas fa-coins"></i> Earn 5 Dogs
+    </button>
+    
+    <div class="ad-grid">
+      <div class="ad-item" onclick="showRewardedAd('video')">
+        <i class="fas fa-video"></i>
+        <p>Watch Video (+5 Dogs)</p>
+      </div>
+      <div class="ad-item" onclick="showRewardedAd('survey')">
+        <i class="fas fa-poll"></i>
+        <p>Quick Survey (+5 Dogs)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="payment-section">
+    <h2>Withdraw USDT (TRC20)</h2>
+    <p>Minimum 1000 DOGS required</p>
+    
+    <input 
+      type="text" 
+      id="usdtWallet" 
+      placeholder="Enter USDT (TRC20) Wallet Address" 
+      class="usdt-input"
+    />
+    
+    <button id="paymentButton" class="payment-button" onclick="requestPayment()">
+      <i class="fas fa-money-bill-wave"></i> Withdraw All DOGS
+    </button>
+    
+    <div id="transactionDetails" class="transaction-details">
+      <p>Withdrawal Successful!</p>
+      <p>Transaction Code: <span id="transactionCode" class="transaction-code"></span></p>
+      <p>DOGS Withdrawn: <span id="redeemedDogs"></span></p>
+      <p>USDT Wallet: <span id="walletUsed"></span></p>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="#"><i class="fas fa-home"></i>Home</a>
+    <a href="https://t.me/MoneTon_ads"><i class="fas fa-share-alt"></i>Share</a>
+    <a href="https://t.me/adsBotceo" target="_blank"><i class="fas fa-user-tie"></i>Payment Admin</a>
+  </div>
+
+  <script>
+    // Telegram User Data
+    function getTelegramUserData() {
+      if (window.Telegram && window.Telegram.WebApp) {
+        const user = Telegram.WebApp.initDataUnsafe.user;
+        if (user) {
+          document.getElementById('userName').textContent = user.first_name || 'User';
+          document.getElementById('userNumber').textContent = user.username ? '@' + user.username : 'Telegram User';
+          
+          if (user.photo_url) {
+            document.getElementById('userAvatar').src = user.photo_url;
+          } else {
+            document.getElementById('userAvatar').src = 'https://cdn-icons-png.flaticon.com/512/2111/2111646.png';
+          }
+        }
+      } else {
+        document.getElementById('userName').textContent = 'MoneTon Ads Center';
+        document.getElementById('userNumber').textContent = 'Balance';
+        document.getElementById('userAvatar').src = 'https://cdn-icons-png.flaticon.com/512/2111/2111646.png';
+      }
+    }
+
+    // Points System
+    let points = parseInt(localStorage.getItem('userPoints')) || 0;
+    document.getElementById('userPoints').textContent = points;
+
+    // Update Payment Button
+    function updatePaymentButton() {
+      const paymentButton = document.getElementById('paymentButton');
+      paymentButton.disabled = points < 1000;
+    }
+
+    // Ad Reward System
+    function showRewardedAd(adType) {
+      let pointsToAdd = 5; // Default points
+      
+      if (typeof show_9423518 === 'function') {
+        show_9423518().then(() => {
+          points += pointsToAdd;
+          localStorage.setItem('userPoints', points);
+          document.getElementById('userPoints').textContent = points;
+          updatePaymentButton();
+          
+          const pointsDisplay = document.getElementById('userPoints');
+          pointsDisplay.style.transform = 'scale(1.2)';
+          setTimeout(() => pointsDisplay.style.transform = 'scale(1)', 300);
+          
+          alert(`Success! You earned ${pointsToAdd} Dogs.`);
+        }).catch(error => {
+          alert('Failed to show ad. Please try again.');
+          console.error('Ad error:', error);
+        });
+      } else {
+        alert('Ad not available at the moment.');
+      }
+    }
+
+    // Withdrawal System
+    function requestPayment() {
+      const usdtWallet = document.getElementById('usdtWallet').value.trim();
+      
+      if (!usdtWallet) {
+        alert("Please enter your USDT (TRC20) wallet address!");
+        return;
+      }
+
+      if (points < 1000) {
+        alert("You need at least 1000 DOGS to withdraw!");
+        return;
+      }
+
+      if (!confirm(`Withdraw ALL ${points} DOGS to:\n${usdtWallet}\n\nConfirm?`)) return;
+
+      const transactionCode = generateTransactionCode();
+      const amount = points;
+
+      // Reset points
+      points = 0;
+      localStorage.setItem('userPoints', points);
+      document.getElementById('userPoints').textContent = points;
+      updatePaymentButton();
+
+      // Show transaction
+      document.getElementById('transactionCode').textContent = transactionCode;
+      document.getElementById('redeemedDogs').textContent = amount;
+      document.getElementById('walletUsed').textContent = usdtWallet;
+      document.getElementById('transactionDetails').style.display = 'block';
+
+      // Send to Telegram bot
+      sendToTelegramBot({
+        user: getTelegramUserInfo(),
+        amount: amount,
+        wallet: usdtWallet,
+        transaction_code: transactionCode
+      });
+
+      alert(`Withdrawal request sent!\n${amount} DOGS will be sent to:\n${usdtWallet}`);
+    }
+
+    // Helper: Get Telegram User Info
+    function getTelegramUserInfo() {
+      if (window.Telegram && window.Telegram.WebApp) {
+        const tgUser = Telegram.WebApp.initDataUnsafe.user;
+        return {
+          id: tgUser.id || "N/A",
+          username: tgUser.username || "N/A",
+          first_name: tgUser.first_name || "N/A"
+        };
+      }
+      return { id: "N/A", username: "N/A", first_name: "Guest" };
+    }
+
+    // Helper: Send to Telegram Bot
+    function sendToTelegramBot(data) {
+      const botToken = "7583152627:AAGPc-JOjCoSl1An_7Oag6jE1cy6vIDsRVk"; // Replace
+      const chatId = "6182886175";    // Replace
+      
+      const message = `🚀 *New Withdrawal Request* 🚀
+      
+📌 *User:* [${data.user.first_name}](tg://user?id=${data.user.id}) (ID: ${data.user.id})
+💰 *Amount:* ${data.amount} DOGS
+📤 *USDT Wallet:* \`${data.wallet}\`
+🆔 *TX Code:* \`${data.transaction_code}\``;
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: "Markdown",
+          reply_markup: {
+            inline_keyboard: [
+              [{ text: "✅ Approve", callback_data: `approve_${data.transaction_code}` }],
+              [{ text: "❌ Reject", callback_data: `reject_${data.transaction_code}` }]
+            ]
+          }
+        })
+      });
+    }
+
+    // Helper: Generate Random Code
+    function generateTransactionCode() {
+      return Math.random().toString(36).substring(2, 10).toUpperCase();
+    }
+
+    // Initialize
+    window.onload = function() {
+      getTelegramUserData();
+      updatePaymentButton();
+    };
+  </script>
+</body>
+</html>
